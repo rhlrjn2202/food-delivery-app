@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="Food Delivery">
+        <ActionItem tap="onViewCart" ios.position="right" android.position="actionBar">
+            <Label text="{{ cartCount }}" class="cart-badge" />
+            <Image src="font://&#xf07a;" class="fas" />
+        </ActionItem>
+    </ActionBar>
+
+    <ScrollView>
+        <StackLayout>
+            <!-- Hero Slider -->
+            <ScrollView orientation="horizontal" height="200">
+                <StackLayout orientation="horizontal">
+                    <Repeater items="{{ heroSlides }}">
+                        <Repeater.itemTemplate>
+                            <GridLayout width="300" height="200" margin="0 5">
+                                <Image src="{{ image }}" stretch="aspectFill" />
+                                <StackLayout verticalAlignment="bottom" backgroundColor="#000000" opacity="0.5" padding="10">
+                                    <Label text="{{ title }}" color="white" fontSize="18" fontWeight="bold" />
+                                    <Label text="{{ description }}" color="white" textWrap="true" />
+                                </StackLayout>
+                            </GridLayout>
+                        </Repeater.itemTemplate>
+                    </Repeater>
+                </StackLayout>
+            </ScrollView>
+
+            <!-- Categories -->
+            <Label text="Categories" class="h2" margin="10" />
+            <GridLayout columns="*, *" rows="auto, auto">
+                <Repeater items="{{ categories }}">
+                    <Repeater.itemTemplate>
+                        <StackLayout tap="{{ $parent.onCategoryTap }}" margin="5" padding="10" backgroundColor="white" borderRadius="5">
+                            <Image src="{{ icon }}" height="50" />
+                            <Label text="{{ name }}" textAlignment="center" />
+                        </StackLayout>
+                    </Repeater.itemTemplate>
+                </Repeater>
+            </GridLayout>
+
+            <!-- Featured Items -->
+            <Label text="Featured Items" class="h2" margin="10" />
+            <StackLayout margin="10">
+                <Repeater items="{{ featuredItems }}">
+                    <Repeater.itemTemplate>
+                        <GridLayout columns="auto, *" rows="auto" margin="0 0 10 0" padding="10" backgroundColor="white" borderRadius="5">
+                            <Image src="{{ image }}" width="80" height="80" stretch="aspectFill" row="0" col="0" />
+                            <StackLayout row="0" col="1" padding="0 0 0 10">
+                                <Label text="{{ name }}" fontWeight="bold" />
+                                <Label text="{{ description }}" textWrap="true" color="#666" />
+                                <GridLayout columns="auto, *">
+                                    <Label text="{{ 'Rs. ' + price }}" color="#2ecc71" fontWeight="bold" />
+                                    <Button text="Add to Cart" tap="{{ $parent.onAddToCart }}" class="btn btn-primary" horizontalAlignment="right" />
+                                </GridLayout>
+                            </StackLayout>
+                        </GridLayout>
+                    </Repeater.itemTemplate>
+                </Repeater>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</Page>

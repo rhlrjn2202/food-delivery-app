@@ -1,0 +1,22 @@
+# Enable error reporting
+php_flag display_startup_errors on
+php_flag display_errors on
+php_flag html_errors on
+
+# Prevent directory listing
+Options -Indexes
+
+# Set default charset
+AddDefaultCharset UTF-8
+
+# Protect files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Allow direct access to these files
+<FilesMatch "^(index|login|logout)\.php$">
+    Order allow,deny
+    Allow from all
+</FilesMatch>
